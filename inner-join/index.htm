@@ -1,0 +1,421 @@
+﻿
+<!DOCTYPE html>
+<html class="html" lang="ru-RU" itemscope="" itemtype="http://schema.org/WebPage">
+<head>
+	<meta charset="UTF-8">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+
+	<title>Inner Join &#8212; Sql server 2008</title>
+<meta name='robots' content='noindex,follow'>
+<meta name="viewport" content="width=device-width, initial-scale=1"><link rel='dns-prefetch' href='//fonts.googleapis.com'>
+<link rel='dns-prefetch' href='//s.w.org'>
+<link rel="alternate" type="application/rss+xml" title="Sql server 2008 &raquo; Лента" href="..\feed\index.rss">
+<link rel="alternate" type="application/rss+xml" title="Sql server 2008 &raquo; Лента комментариев" href="..\comments\feed\index.rss">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/wpfolder\/wordpress\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.2.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css' href='..\wp-includes\css\dist\block-library\style.min.css?ver=5.2.1' type='text/css' media='all'>
+<link rel='stylesheet' id='wp-block-library-theme-css' href='..\wp-includes\css\dist\block-library\theme.min.css?ver=5.2.1' type='text/css' media='all'>
+<link rel='stylesheet' id='font-awesome-css' href='..\wp-content\themes\oceanwp\assets\css\third\font-awesome.min.css?ver=4.7.0' type='text/css' media='all'>
+<link rel='stylesheet' id='simple-line-icons-css' href='..\wp-content\themes\oceanwp\assets\css\third\simple-line-icons.min.css?ver=2.4.0' type='text/css' media='all'>
+<link rel='stylesheet' id='magnific-popup-css' href='..\wp-content\themes\oceanwp\assets\css\third\magnific-popup.min.css?ver=1.0.0' type='text/css' media='all'>
+<link rel='stylesheet' id='slick-css' href='..\wp-content\themes\oceanwp\assets\css\third\slick.min.css?ver=1.6.0' type='text/css' media='all'>
+<link rel='stylesheet' id='oceanwp-style-css' href='..\wp-content\themes\oceanwp\assets\css\style.min.css?ver=1.6.7' type='text/css' media='all'>
+<link rel='stylesheet' id='oceanwp-google-font-roboto-slab-css' href='//fonts.googleapis.com/css?family=Roboto+Slab%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900%2C100i%2C200i%2C300i%2C400i%2C500i%2C600i%2C700i%2C800i%2C900i&subset=latin&ver=5.2.1' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-icons-css' href='..\wp-content\plugins\elementor\assets\lib\eicons\css\elementor-icons.min.css?ver=4.3.0' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-animations-css' href='..\wp-content\plugins\elementor\assets\lib\animations\animations.min.css?ver=2.5.16' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-frontend-css' href='..\wp-content\plugins\elementor\assets\css\frontend.min.css?ver=2.5.16' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-global-css' href='..\wp-content\uploads\elementor\css\global.css?ver=1559122102' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-post-177-css' href='..\wp-content\uploads\elementor\css\post-177.css?ver=1559684895' type='text/css' media='all'>
+<link rel='stylesheet' id='oe-widgets-style-css' href='..\wp-content\plugins\ocean-extra\assets\css\widgets.css?ver=5.2.1' type='text/css' media='all'>
+<link rel='stylesheet' id='google-fonts-1-css' href='https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CAlfa+Slab+One%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&subset=cyrillic&ver=5.2.1' type='text/css' media='all'>
+<script type='text/javascript' src='..\wp-includes\js\jquery\jquery.js?ver=1.12.4-wp'></script>
+<script type='text/javascript' src='..\wp-includes\js\jquery\jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='..\wp-json\index.json'>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="..\xmlrpc.xml?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="..\wp-includes\wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 5.2.1">
+<link rel="canonical" href="index.htm">
+<link rel='shortlink' href='http://wpfolder/wordpress/?p=177'>
+<link rel="alternate" type="application/json+oembed" href="..\wp-json\oembed\1.0\embed-25.json?url=http%3A%2F%2Fwpfolder%2Fwordpress%2Finner-join%2F">
+<link rel="alternate" type="text/xml+oembed" href="..\wp-json\oembed\1.0\embed-25.xml?url=http%3A%2F%2Fwpfolder%2Fwordpress%2Finner-join%2F&#038;format=xml">
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<!-- OceanWP CSS -->
+<style type="text/css">
+/* Header CSS */#site-logo #site-logo-inner,.oceanwp-social-menu .social-menu-inner,#site-header.full_screen-header .menu-bar-inner,.after-header-content .after-header-content-inner{height:114px}#site-navigation-wrap .dropdown-menu >li >a,.oceanwp-mobile-menu-icon a,.after-header-content-inner >a{line-height:114px}#site-header,.has-transparent-header .is-sticky #site-header,.has-vh-transparent .is-sticky #site-header.vertical-header,#searchform-header-replace{background-color:#4E7891}#site-header.transparent-header{background-color:rgba(0,0,0,0.27)}#site-header.has-header-media .overlay-header-media{background-color:rgba(0,0,0,0.5)}#site-logo #site-logo-inner a img,#site-header.center-header #site-navigation-wrap .middle-site-logo a img{max-width:265px}#site-header #site-logo #site-logo-inner a img,#site-header.center-header #site-navigation-wrap .middle-site-logo a img{max-height:265px}#site-logo a.site-logo-text{color:#ffffff}#site-navigation-wrap .dropdown-menu >li >a{padding:0 16px}#site-navigation-wrap .dropdown-menu >li >a,.oceanwp-mobile-menu-icon a,#searchform-header-replace-close{color:#ffffff}/* Typography CSS */#site-logo a.site-logo-text{font-family:Roboto Slab}#site-navigation-wrap .dropdown-menu >li >a,#site-header.full_screen-header .fs-dropdown-menu >li >a,#site-header.top-header #site-navigation-wrap .dropdown-menu >li >a,#site-header.center-header #site-navigation-wrap .dropdown-menu >li >a,#site-header.medium-header #site-navigation-wrap .dropdown-menu >li >a,.oceanwp-mobile-menu-icon a{font-size:15px;letter-spacing:.8px;text-transform:uppercase}
+</style></head>
+
+<body class="page-template-default page page-id-177 wp-custom-logo wp-embed-responsive oceanwp-theme sidebar-mobile has-transparent-header no-header-border default-breakpoint content-full-screen page-header-disabled has-breadcrumbs elementor-default elementor-page elementor-page-177">
+
+	
+	<div id="outer-wrap" class="site clr">
+
+		
+		<div id="wrap" class="clr">
+
+			
+				<div id="transparent-header-wrap" class="clr">
+
+<header id="site-header" class="transparent-header effect-nine clr" data-height="114" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
+
+	
+		
+			
+			<div id="site-header-inner" class="clr container">
+
+				
+				
+
+<div id="site-logo" class="clr" itemscope="" itemtype="http://schema.org/Brand">
+
+	
+	<div id="site-logo-inner" class="clr">
+
+		<a href="..\index.htm" class="custom-logo-link" rel="home"><img width="390" height="125" src="..\wp-content\uploads\2019\05\cropped-logo_sqlserver_02-1.png" class="custom-logo" alt="Sql server 2008" srcset="..\wp-content\uploads\2019\05\cropped-logo_sqlserver_02-1.png 390w, ..\wp-content\uploads\2019\05\cropped-logo_sqlserver_02-1-300x96.png 300w" sizes="(max-width: 390px) 100vw, 390px"></a>
+	</div><!-- #site-logo-inner -->
+
+	
+	
+</div><!-- #site-logo -->
+
+			<div id="site-navigation-wrap" class="clr">
+		
+			
+			
+			<nav id="site-navigation" class="navigation main-navigation clr" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+
+				<ul id="menu-%d0%b3%d0%bb%d0%b0%d0%b2%d0%bd%d0%be%d0%b5" class="main-menu dropdown-menu sf-menu"><li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-16"><a href="http://wpfolder/wordpress" class="menu-link"><span class="text-wrap">Главная</span></a></li><li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18"><a href="..\лабораторные-работы\index.htm" class="menu-link"><span class="text-wrap">Лабораторные работы</span></a></li><li id="menu-item-17" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17"><a href="..\контроль\index.htm" class="menu-link"><span class="text-wrap">Контроль</span></a></li><li id="menu-item-50" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-50"><a href="..\справка\index.htm" class="menu-link"><span class="text-wrap">Справка</span></a></li><li id="menu-item-51" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-51"><a href="..\источники\index.htm" class="menu-link"><span class="text-wrap">Источники</span></a></li></ul>
+			</nav><!-- #site-navigation -->
+
+			
+			
+					</div><!-- #site-navigation-wrap -->
+		
+		
+	
+				
+	<div class="oceanwp-mobile-menu-icon clr mobile-right">
+
+		
+		
+		
+		<a href="#" class="mobile-menu">
+							<i class="fa fa-bars"></i>
+							<span class="oceanwp-text">Меню</span>
+
+						</a>
+
+		
+		
+		
+	</div><!-- #oceanwp-mobile-menu-navbar -->
+
+
+			</div><!-- #site-header-inner -->
+
+			
+			
+		
+				
+	
+</header><!-- #site-header -->
+
+	</div>
+
+						
+			<main id="main" class="site-main clr">
+
+				
+	
+	<div id="content-wrap" class="container clr">
+
+		
+		<div id="primary" class="content-area clr">
+
+			
+			<div id="content" class="site-content clr">
+
+				
+				
+<article class="single-page-article clr">
+
+	
+<div class="entry clr" itemprop="text">
+				<div data-elementor-type="post" data-elementor-id="177" class="elementor elementor-177" data-elementor-settings="[]">
+			<div class="elementor-inner">
+				<div class="elementor-section-wrap">
+							<section class="elementor-element elementor-element-13aea12d elementor-section-content-bottom elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-top-section" data-id="13aea12d" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+				<div class="elementor-row">
+				<div class="elementor-element elementor-element-339043da elementor-invisible elementor-column elementor-col-33 elementor-top-column" data-id="339043da" data-element_type="column" data-settings="{&quot;animation&quot;:&quot;none&quot;}">
+			<div class="elementor-column-wrap  elementor-element-populated">
+					<div class="elementor-widget-wrap">
+				<div class="elementor-element elementor-element-630c0db6 elementor-widget elementor-widget-image" data-id="630c0db6" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image">
+							<figure class="wp-caption">
+										<img width="150" height="150" src="..\wp-content\uploads\2019\05\книги.png" class="attachment-thumbnail size-thumbnail" alt="">											<figcaption class="widget-image-caption wp-caption-text"></figcaption>
+										</figure>
+					</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-634a85ff elementor-invisible elementor-widget elementor-widget-toggle" data-id="634a85ff" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}" data-widget_type="toggle.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-toggle" role="tablist">
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1661" class="elementor-tab-title" data-tab="1" role="tab" aria-controls="elementor-tab-content-1661">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+							<i class="elementor-toggle-icon-closed fa fa-folder"></i>
+							<i class="elementor-toggle-icon-opened fa fa-folder-open"></i>
+						</span>
+												<a href=""> Глава 1. Начало работы с MS SQL Server</a>
+					</div>
+					<div id="elementor-tab-content-1661" class="elementor-tab-content elementor-clearfix" data-tab="1" role="tabpanel" aria-labelledby="elementor-tab-title-1661"><p><!-- [if gte mso 9]><xml><br /><o:OfficeDocumentSettings><br /><o:RelyOnVML></o:RelyOnVML><br /><o:AllowPNG></o:AllowPNG><br /></o:OfficeDocumentSettings><br /></xml><![endif]--><!-- [if gte mso 9]><xml><br /><w:WordDocument><br /><w:View>Normal</w:View><br /><w:Zoom>0</w:Zoom><br /><w:TrackMoves></w:TrackMoves><br /><w:TrackFormatting></w:TrackFormatting><br /><w:PunctuationKerning></w:PunctuationKerning><br /><w:ValidateAgainstSchemas></w:ValidateAgainstSchemas><br /><w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid><br /><w:IgnoreMixedContent>false</w:IgnoreMixedContent><br /><w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText><br /><w:DoNotPromoteQF></w:DoNotPromoteQF><br /><w:LidThemeOther>RU</w:LidThemeOther><br /><w:LidThemeAsian>X-NONE</w:LidThemeAsian><br /><w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript><br /><w:Compatibility><br /><w:BreakWrappedTables></w:BreakWrappedTables><br /><w:SnapToGridInCell></w:SnapToGridInCell><br /><w:WrapTextWithPunct></w:WrapTextWithPunct><br /><w:UseAsianBreakRules></w:UseAsianBreakRules><br /><w:DontGrowAutofit></w:DontGrowAutofit><br /><w:SplitPgBreakAndParaMark></w:SplitPgBreakAndParaMark><br /><w:EnableOpenTypeKerning></w:EnableOpenTypeKerning><br /><w:DontFlipMirrorIndents></w:DontFlipMirrorIndents><br /><w:OverrideTableStyleHps></w:OverrideTableStyleHps><br /></w:Compatibility><br /><m:mathPr><br /><m:mathFont m:val="Cambria Math"></m:mathFont><br /><m:brkBin m:val="before"></m:brkBin><br /><m:brkBinSub m:val="--"></m:brkBinSub><br /><m:smallFrac m:val="off"></m:smallFrac><br /><m:dispDef></m:dispDef><br /><m:lMargin m:val="0"></m:lMargin><br /><m:rMargin m:val="0"></m:rMargin><br /><m:defJc m:val="centerGroup"></m:defJc><br /><m:wrapIndent m:val="1440"></m:wrapIndent><br /><m:intLim m:val="subSup"></m:intLim><br /><m:naryLim m:val="undOvr"></m:naryLim><br /></m:mathPr></w:WordDocument><br /></xml><![endif]--><!-- [if gte mso 9]><xml><br /><w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="true" DefSemiHidden="true" DefQFormat="false" DefPriority="99" LatentStyleCount="267"><br /><w:LsdException Locked="false" Priority="0" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="Normal"></w:LsdException><br /><w:LsdException Locked="false" Priority="9" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="heading 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 7"></w:LsdException><br /><w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 8"></w:LsdException><br /><w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 9"></w:LsdException><br /><w:LsdException Locked="false" Priority="39" Name="toc 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="39" Name="toc 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="39" Name="toc 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="39" Name="toc 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="39" Name="toc 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="39" Name="toc 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="39" Name="toc 7"></w:LsdException><br /><w:LsdException Locked="false" Priority="39" Name="toc 8"></w:LsdException><br /><w:LsdException Locked="false" Priority="39" Name="toc 9"></w:LsdException><br /><w:LsdException Locked="false" Priority="35" QFormat="true" Name="caption"></w:LsdException><br /><w:LsdException Locked="false" Priority="10" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="Title"></w:LsdException><br /><w:LsdException Locked="false" Priority="1" Name="Default Paragraph Font"></w:LsdException><br /><w:LsdException Locked="false" Priority="11" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="Subtitle"></w:LsdException><br /><w:LsdException Locked="false" Priority="22" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="Strong"></w:LsdException><br /><w:LsdException Locked="false" Priority="20" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="Emphasis"></w:LsdException><br /><w:LsdException Locked="false" Priority="59" SemiHidden="false" UnhideWhenUsed="false" Name="Table Grid"></w:LsdException><br /><w:LsdException Locked="false" UnhideWhenUsed="false" Name="Placeholder Text"></w:LsdException><br /><w:LsdException Locked="false" Priority="1" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="No Spacing"></w:LsdException><br /><w:LsdException Locked="false" Priority="60" SemiHidden="false" UnhideWhenUsed="false" Name="Light Shading"></w:LsdException><br /><w:LsdException Locked="false" Priority="61" SemiHidden="false" UnhideWhenUsed="false" Name="Light List"></w:LsdException><br /><w:LsdException Locked="false" Priority="62" SemiHidden="false" UnhideWhenUsed="false" Name="Light Grid"></w:LsdException><br /><w:LsdException Locked="false" Priority="63" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="64" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="65" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="66" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="67" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="68" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="69" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="70" SemiHidden="false" UnhideWhenUsed="false" Name="Dark List"></w:LsdException><br /><w:LsdException Locked="false" Priority="71" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Shading"></w:LsdException><br /><w:LsdException Locked="false" Priority="72" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful List"></w:LsdException><br /><w:LsdException Locked="false" Priority="73" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Grid"></w:LsdException><br /><w:LsdException Locked="false" Priority="60" SemiHidden="false" UnhideWhenUsed="false" Name="Light Shading Accent 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="61" SemiHidden="false" UnhideWhenUsed="false" Name="Light List Accent 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="62" SemiHidden="false" UnhideWhenUsed="false" Name="Light Grid Accent 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="63" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 1 Accent 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="64" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 2 Accent 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="65" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 1 Accent 1"></w:LsdException><br /><w:LsdException Locked="false" UnhideWhenUsed="false" Name="Revision"></w:LsdException><br /><w:LsdException Locked="false" Priority="34" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="List Paragraph"></w:LsdException><br /><w:LsdException Locked="false" Priority="29" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="Quote"></w:LsdException><br /><w:LsdException Locked="false" Priority="30" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="Intense Quote"></w:LsdException><br /><w:LsdException Locked="false" Priority="66" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 2 Accent 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="67" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 1 Accent 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="68" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 2 Accent 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="69" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 3 Accent 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="70" SemiHidden="false" UnhideWhenUsed="false" Name="Dark List Accent 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="71" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Shading Accent 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="72" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful List Accent 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="73" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Grid Accent 1"></w:LsdException><br /><w:LsdException Locked="false" Priority="60" SemiHidden="false" UnhideWhenUsed="false" Name="Light Shading Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="61" SemiHidden="false" UnhideWhenUsed="false" Name="Light List Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="62" SemiHidden="false" UnhideWhenUsed="false" Name="Light Grid Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="63" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 1 Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="64" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 2 Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="65" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 1 Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="66" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 2 Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="67" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 1 Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="68" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 2 Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="69" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 3 Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="70" SemiHidden="false" UnhideWhenUsed="false" Name="Dark List Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="71" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Shading Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="72" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful List Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="73" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Grid Accent 2"></w:LsdException><br /><w:LsdException Locked="false" Priority="60" SemiHidden="false" UnhideWhenUsed="false" Name="Light Shading Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="61" SemiHidden="false" UnhideWhenUsed="false" Name="Light List Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="62" SemiHidden="false" UnhideWhenUsed="false" Name="Light Grid Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="63" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 1 Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="64" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 2 Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="65" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 1 Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="66" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 2 Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="67" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 1 Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="68" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 2 Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="69" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 3 Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="70" SemiHidden="false" UnhideWhenUsed="false" Name="Dark List Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="71" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Shading Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="72" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful List Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="73" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Grid Accent 3"></w:LsdException><br /><w:LsdException Locked="false" Priority="60" SemiHidden="false" UnhideWhenUsed="false" Name="Light Shading Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="61" SemiHidden="false" UnhideWhenUsed="false" Name="Light List Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="62" SemiHidden="false" UnhideWhenUsed="false" Name="Light Grid Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="63" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 1 Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="64" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 2 Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="65" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 1 Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="66" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 2 Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="67" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 1 Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="68" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 2 Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="69" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 3 Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="70" SemiHidden="false" UnhideWhenUsed="false" Name="Dark List Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="71" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Shading Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="72" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful List Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="73" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Grid Accent 4"></w:LsdException><br /><w:LsdException Locked="false" Priority="60" SemiHidden="false" UnhideWhenUsed="false" Name="Light Shading Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="61" SemiHidden="false" UnhideWhenUsed="false" Name="Light List Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="62" SemiHidden="false" UnhideWhenUsed="false" Name="Light Grid Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="63" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 1 Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="64" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 2 Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="65" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 1 Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="66" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 2 Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="67" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 1 Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="68" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 2 Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="69" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 3 Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="70" SemiHidden="false" UnhideWhenUsed="false" Name="Dark List Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="71" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Shading Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="72" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful List Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="73" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Grid Accent 5"></w:LsdException><br /><w:LsdException Locked="false" Priority="60" SemiHidden="false" UnhideWhenUsed="false" Name="Light Shading Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="61" SemiHidden="false" UnhideWhenUsed="false" Name="Light List Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="62" SemiHidden="false" UnhideWhenUsed="false" Name="Light Grid Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="63" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 1 Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="64" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Shading 2 Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="65" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 1 Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="66" SemiHidden="false" UnhideWhenUsed="false" Name="Medium List 2 Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="67" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 1 Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="68" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 2 Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="69" SemiHidden="false" UnhideWhenUsed="false" Name="Medium Grid 3 Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="70" SemiHidden="false" UnhideWhenUsed="false" Name="Dark List Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="71" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Shading Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="72" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful List Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="73" SemiHidden="false" UnhideWhenUsed="false" Name="Colorful Grid Accent 6"></w:LsdException><br /><w:LsdException Locked="false" Priority="19" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="Subtle Emphasis"></w:LsdException><br /><w:LsdException Locked="false" Priority="21" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="Intense Emphasis"></w:LsdException><br /><w:LsdException Locked="false" Priority="31" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="Subtle Reference"></w:LsdException><br /><w:LsdException Locked="false" Priority="32" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="Intense Reference"></w:LsdException><br /><w:LsdException Locked="false" Priority="33" SemiHidden="false" UnhideWhenUsed="false" QFormat="true" Name="Book Title"></w:LsdException><br /><w:LsdException Locked="false" Priority="37" Name="Bibliography"></w:LsdException><br /><w:LsdException Locked="false" Priority="39" QFormat="true" Name="TOC Heading"></w:LsdException><br /></w:LatentStyles><br /></xml><![endif]--><!-- [if gte mso 10]></p>
+<style>
+ /* Style Definitions */<br /> table.MsoNormalTable<br />	{mso-style-name:"Обычная таблица";<br />	mso-tstyle-rowband-size:0;<br />	mso-tstyle-colband-size:0;<br />	mso-style-noshow:yes;<br />	mso-style-priority:99;<br />	mso-style-parent:"";<br />	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;<br />	mso-para-margin-top:0cm;<br />	mso-para-margin-right:0cm;<br />	mso-para-margin-bottom:10.0pt;<br />	mso-para-margin-left:0cm;<br />	line-height:115%;<br />	mso-pagination:widow-orphan;<br />	font-size:11.0pt;<br />	font-family:"Calibri","sans-serif";<br />	mso-ascii-font-family:Calibri;<br />	mso-ascii-theme-font:minor-latin;<br />	mso-hansi-font-family:Calibri;<br />	mso-hansi-theme-font:minor-latin;<br />	mso-bidi-font-family:"Times New Roman";<br />	mso-bidi-theme-font:minor-bidi;<br />	mso-fareast-language:EN-US;}<br /></style>
+<p><![endif]--></p><ol><li><a href="..\лабораторные-работы\index.htm" data-wplink-url-error="true">Создание базы данных</a></li><li><a href="..\создание-таблиц\index.htm" data-wplink-url-error="true">Создание таблиц</a></li><li><a href="..\первый-запрос-на-t-sql\index.htm" data-wplink-url-error="true">Первый запрос на T-SQL(Вывод таблицы)</a></li></ol></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1662" class="elementor-tab-title" data-tab="2" role="tab" aria-controls="elementor-tab-content-1662">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+							<i class="elementor-toggle-icon-closed fa fa-folder"></i>
+							<i class="elementor-toggle-icon-opened fa fa-folder-open"></i>
+						</span>
+												<a href=""> Глава 2. Основы T-SQL. DDL</a>
+					</div>
+					<div id="elementor-tab-content-1662" class="elementor-tab-content elementor-clearfix" data-tab="2" role="tabpanel" aria-labelledby="elementor-tab-title-1662"><ol><li style="text-align: left;"><a href="..\атрибуты-и-ограничения-столбцов-и-таб\index.htm" data-wplink-url-error="true">Атрибуты и ограничения столбцов и таблиц</a></li><li style="text-align: left;"><a href="..\внешние-ключи\index.htm" data-wplink-url-error="true">Внешние ключи</a></li><li style="text-align: left;"><a href="..\изменение-таблицы\index.htm" data-wplink-url-error="true">Изменение таблицы</a></li><li style="text-align: left;"><a href="..\пакеты-команда-go\index.htm" data-wplink-url-error="true">Пакеты. Команда GO</a></li></ol></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1663" class="elementor-tab-title" data-tab="3" role="tab" aria-controls="elementor-tab-content-1663">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+							<i class="elementor-toggle-icon-closed fa fa-folder"></i>
+							<i class="elementor-toggle-icon-opened fa fa-folder-open"></i>
+						</span>
+												<a href=""> Глава 3. Основы T-SQL. DDL</a>
+					</div>
+					<div id="elementor-tab-content-1663" class="elementor-tab-content elementor-clearfix" data-tab="3" role="tabpanel" aria-labelledby="elementor-tab-title-1663"><ol><li><a href="..\добавление-данных-команда-insert\index.htm" data-wplink-url-error="true">Добавление данных. Команда INSERT</a></li><li><a href="..\выборка-данных-команда-select\index.htm" data-wplink-url-error="true">Выборка данных. Команда SELECT</a></li><li><a href="..\сортировка-order-by\index.htm" data-wplink-url-error="true">Сортировка. ORDER BY</a></li><li><a href="..\извлечение-диапазона-строк\index.htm" data-wplink-url-error="true">Извлечение диапазона строк</a></li><li><a href="..\фильтрация-where\index.htm" data-wplink-url-error="true">Фильтрация. WHERE</a></li><li><a href="..\операторы-фильтрации\index.htm" data-wplink-url-error="true">Операторы фильтрации</a></li><li><a href="..\обновление-данных-команда-update\index.htm" data-wplink-url-error="true">Обновление данных. Команда UPDATE</a></li><li><a href="..\удаление-данных-команда-delete\index.htm" data-wplink-url-error="true">Удаление данных. Команда DELETE</a></li></ol></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1664" class="elementor-tab-title" data-tab="4" role="tab" aria-controls="elementor-tab-content-1664">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+							<i class="elementor-toggle-icon-closed fa fa-folder"></i>
+							<i class="elementor-toggle-icon-opened fa fa-folder-open"></i>
+						</span>
+												<a href=""> Глава 4. Группировка</a>
+					</div>
+					<div id="elementor-tab-content-1664" class="elementor-tab-content elementor-clearfix" data-tab="4" role="tabpanel" aria-labelledby="elementor-tab-title-1664"><ol><li style="text-align: left;"><a href="..\агрегатные-функции\index.htm" data-wplink-url-error="true">Агрегатные функции</a></li><li style="text-align: left;"><a href="..\операторы-group-by-и-having\index.htm" data-wplink-url-error="true">Операторы GROUP BY и HAVING</a></li><li style="text-align: left;"><a href="..\расширения-sql-server-для-группировки\index.htm" data-wplink-url-error="true">Расширения SQL Server для группировки</a></li></ol></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1665" class="elementor-tab-title" data-tab="5" role="tab" aria-controls="elementor-tab-content-1665">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+							<i class="elementor-toggle-icon-closed fa fa-folder"></i>
+							<i class="elementor-toggle-icon-opened fa fa-folder-open"></i>
+						</span>
+												<a href=""> Глава 5. Подзапросы</a>
+					</div>
+					<div id="elementor-tab-content-1665" class="elementor-tab-content elementor-clearfix" data-tab="5" role="tabpanel" aria-labelledby="elementor-tab-title-1665"><ol><li><a href="..\выполнение-подзапросов\index.htm" data-wplink-url-error="true">Выполнение подзапросов</a></li><li><a href="..\подзапросы-в-основных-командах-sql\index.htm" data-wplink-url-error="true">Подзапросы в основных командах SQL</a></li><li><a href="..\оператор-exists\index.htm" data-wplink-url-error="true">Оператор EXISTS</a></li></ol></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1666" class="elementor-tab-title" data-tab="6" role="tab" aria-controls="elementor-tab-content-1666">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+							<i class="elementor-toggle-icon-closed fa fa-folder"></i>
+							<i class="elementor-toggle-icon-opened fa fa-folder-open"></i>
+						</span>
+												<a href=""> Глава 6. Соединение таблиц</a>
+					</div>
+					<div id="elementor-tab-content-1666" class="elementor-tab-content elementor-clearfix" data-tab="6" role="tabpanel" aria-labelledby="elementor-tab-title-1666"><ol><li><a href="index.htm" data-wplink-url-error="true">Inner Join</a></li><li><a href="..\outer-join\index.htm" data-wplink-url-error="true">Outer Join</a></li><li><a href="..\группировка-в-соединениях\index.htm" data-wplink-url-error="true">Группировка в соединениях</a></li><li><a href="..\union\index.htm" data-wplink-url-error="true">UNION</a></li><li><a href="..\except\index.htm" data-wplink-url-error="true">EXCEPT</a></li><li><a href="..\intersect\index.htm" data-wplink-url-error="true">INTERSECT</a></li></ol></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1667" class="elementor-tab-title" data-tab="7" role="tab" aria-controls="elementor-tab-content-1667">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+							<i class="elementor-toggle-icon-closed fa fa-folder"></i>
+							<i class="elementor-toggle-icon-opened fa fa-folder-open"></i>
+						</span>
+												<a href=""> Глава 7. Функции</a>
+					</div>
+					<div id="elementor-tab-content-1667" class="elementor-tab-content elementor-clearfix" data-tab="7" role="tabpanel" aria-labelledby="elementor-tab-title-1667"><ol><li style="text-align: left;"><a href="..\функции-для-работы-со-строками\index.htm" data-wplink-url-error="true">Функции для работы со строками</a></li><li style="text-align: left;"><a href="..\функции-для-работы-с-числами\index.htm" data-wplink-url-error="true">Функции для работы с числами</a></li><li style="text-align: left;"><a href="..\функции-по-работе-с-датами-и-временем\index.htm" data-wplink-url-error="true">Функции по работе с датами и временем</a></li><li style="text-align: left;"><a href="..\преобразование-данных\index.htm" data-wplink-url-error="true">Преобразование данных</a></li><li style="text-align: left;"><a href="http://wpfolder/wordpress/%d1%84%d1%83%d0%bd%d0%ba%d1%86%d0%b8%d0%b8-case-%d0%b8-iif/" data-wplink-url-error="true">Функции CASE и IIF</a></li></ol></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1668" class="elementor-tab-title" data-tab="8" role="tab" aria-controls="elementor-tab-content-1668">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+							<i class="elementor-toggle-icon-closed fa fa-folder"></i>
+							<i class="elementor-toggle-icon-opened fa fa-folder-open"></i>
+						</span>
+												<a href=""> Глава 8. Представления и табличные объекты</a>
+					</div>
+					<div id="elementor-tab-content-1668" class="elementor-tab-content elementor-clearfix" data-tab="8" role="tabpanel" aria-labelledby="elementor-tab-title-1668"><ol><li style="text-align: left;"><a href="..\представления\index.htm" data-wplink-url-error="true">Представления</a></li><li style="text-align: left;"><a href="..\обновляемое-представление\index.htm" data-wplink-url-error="true">Обновляемое представление</a></li><li style="text-align: left;"><a href="..\табличные-переменные\index.htm" data-wplink-url-error="true">Табличные переменные</a></li></ol></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1669" class="elementor-tab-title" data-tab="9" role="tab" aria-controls="elementor-tab-content-1669">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+							<i class="elementor-toggle-icon-closed fa fa-folder"></i>
+							<i class="elementor-toggle-icon-opened fa fa-folder-open"></i>
+						</span>
+												<a href=""> Глава 9. Хранимые процедуры </a>
+					</div>
+					<div id="elementor-tab-content-1669" class="elementor-tab-content elementor-clearfix" data-tab="9" role="tabpanel" aria-labelledby="elementor-tab-title-1669"><ol><li style="text-align: left;"><a href="..\создание-и-выполнение-процедур\index.htm" data-wplink-url-error="true">Создание и выполнение процедур</a></li><li style="text-align: left;"><a href="..\параметры-в-процедурах\index.htm" data-wplink-url-error="true">Параметры в процедурах</a></li><li style="text-align: left;"><a href="..\выходные-параметры-и-возвращение-рез\index.htm" data-wplink-url-error="true">Выходные параметры и возвращение результата</a></li></ol></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-16610" class="elementor-tab-title" data-tab="10" role="tab" aria-controls="elementor-tab-content-16610">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+							<i class="elementor-toggle-icon-closed fa fa-folder"></i>
+							<i class="elementor-toggle-icon-opened fa fa-folder-open"></i>
+						</span>
+												<a href=""> Глава 10. Триггеры </a>
+					</div>
+					<div id="elementor-tab-content-16610" class="elementor-tab-content elementor-clearfix" data-tab="10" role="tabpanel" aria-labelledby="elementor-tab-title-16610"><ol><li style="text-align: left;"><a href="..\определение-триггеров\index.htm" data-wplink-url-error="true">Определение триггеров</a></li><li style="text-align: left;"><a href="..\триггеры-для-операций-insert-update-delete\index.htm" data-wplink-url-error="true">Триггеры для операций INSERT, UPDATE, DELETE</a></li><li style="text-align: left;"><a href="..\триггер-instead-of\index.htm" data-wplink-url-error="true">Триггер INSTEAD OF</a></li></ol></div>
+				</div>
+					</div>
+				</div>
+				</div>
+						</div>
+			</div>
+		</div>
+				<div class="elementor-element elementor-element-70ec693a elementor-column elementor-col-66 elementor-top-column" data-id="70ec693a" data-element_type="column">
+			<div class="elementor-column-wrap  elementor-element-populated">
+					<div class="elementor-widget-wrap">
+				<div class="elementor-element elementor-element-4406f82c elementor-invisible elementor-widget elementor-widget-heading" data-id="4406f82c" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;fadeIn&quot;}" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h1 class="elementor-heading-title elementor-size-large">Лабораторная работа 6
+</h1>		</div>
+				</div>
+				<div class="elementor-element elementor-element-3ca8ed08 elementor-widget elementor-widget-text-editor" data-id="3ca8ed08" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-text-editor elementor-clearfix"><p>В прошлой теме было рассмотрено неявное соединение таблиц. Оно производилось на основе простой выборки неявно путем сведения данных. Для явного соединения данных из двух таблиц применяется оператор <span class="b">JOIN</span>. Общий формальный синтаксис применения оператора INNER JOIN:</p><div><div id="highlighter_903326" class="syntaxhighlighter  sql"><table border="0" cellspacing="0" cellpadding="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="sql keyword">SELECT</code> <code class="sql plain">столбцы</code></div><div class="line number2 index1 alt1"><code class="sql keyword">FROM</code> <code class="sql plain">таблица1</code></div><div class="line number3 index2 alt2"><code class="sql spaces">    </code><code class="sql plain">[</code><code class="sql keyword">INNER</code><code class="sql plain">] </code><code class="sql color1">JOIN</code> <code class="sql plain">таблица2</code></div><div class="line number4 index3 alt1"><code class="sql spaces">    </code><code class="sql keyword">ON</code> <code class="sql plain">условие1</code></div><div class="line number5 index4 alt2"><code class="sql spaces">    </code><code class="sql plain">[[</code><code class="sql keyword">INNER</code><code class="sql plain">] </code><code class="sql color1">JOIN</code> <code class="sql plain">таблица3</code></div><div class="line number6 index5 alt1"><code class="sql spaces">    </code><code class="sql keyword">ON</code> <code class="sql plain">условие2]</code></div></div></td></tr></tbody></table></div></div><p>После оператора <span class="b">JOIN</span> идет название второй таблицы, из которой надо добавить данные в выборку. Перед JOIN может использоваться необязательное ключевое слово <span class="b">INNER</span>. Его наличие или отсутствие ни на что не влияет. Затем после ключевого слова <span class="b">ON</span> указывается условие соединения. Это условие устанавливает, как две таблицы будут сравниваться. В большинстве случаев для соединения применяется первичный ключ главной таблицы и внешний ключ зависимой таблицы.</p><p>Возьмем таблицы с данными из прошлой темы:</p><div><div id="highlighter_466314" class="syntaxhighlighter  sql"><table border="0" cellspacing="0" cellpadding="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="sql plain">USE productsdb;</code></div><div class="line number2 index1 alt1"> </div><div class="line number3 index2 alt2"><code class="sql keyword">CREATE</code> <code class="sql keyword">TABLE</code> <code class="sql plain">Products</code></div><div class="line number4 index3 alt1"><code class="sql plain">(</code></div><div class="line number5 index4 alt2"><code class="sql spaces">    </code><code class="sql plain">Id </code><code class="sql keyword">INT</code> <code class="sql plain">IDENTITY </code><code class="sql keyword">PRIMARY</code> <code class="sql keyword">KEY</code><code class="sql plain">,</code></div><div class="line number6 index5 alt1"><code class="sql spaces">    </code><code class="sql plain">ProductName NVARCHAR(30) </code><code class="sql color1">NOT</code> <code class="sql color1">NULL</code><code class="sql plain">,</code></div><div class="line number7 index6 alt2"><code class="sql spaces">    </code><code class="sql plain">Manufacturer NVARCHAR(20) </code><code class="sql color1">NOT</code> <code class="sql color1">NULL</code><code class="sql plain">,</code></div><div class="line number8 index7 alt1"><code class="sql spaces">    </code><code class="sql plain">ProductCount </code><code class="sql keyword">INT</code> <code class="sql keyword">DEFAULT</code> <code class="sql plain">0,</code></div><div class="line number9 index8 alt2"><code class="sql spaces">    </code><code class="sql plain">Price MONEY </code><code class="sql color1">NOT</code> <code class="sql color1">NULL</code></div><div class="line number10 index9 alt1"><code class="sql plain">);</code></div><div class="line number11 index10 alt2"><code class="sql keyword">CREATE</code> <code class="sql keyword">TABLE</code> <code class="sql plain">Customers</code></div><div class="line number12 index11 alt1"><code class="sql plain">(</code></div><div class="line number13 index12 alt2"><code class="sql spaces">    </code><code class="sql plain">Id </code><code class="sql keyword">INT</code> <code class="sql plain">IDENTITY </code><code class="sql keyword">PRIMARY</code> <code class="sql keyword">KEY</code><code class="sql plain">,</code></div><div class="line number14 index13 alt1"><code class="sql spaces">    </code><code class="sql plain">FirstName NVARCHAR(30) </code><code class="sql color1">NOT</code> <code class="sql color1">NULL</code></div><div class="line number15 index14 alt2"><code class="sql plain">);</code></div><div class="line number16 index15 alt1"><code class="sql keyword">CREATE</code> <code class="sql keyword">TABLE</code> <code class="sql plain">Orders</code></div><div class="line number17 index16 alt2"><code class="sql plain">(</code></div><div class="line number18 index17 alt1"><code class="sql spaces">    </code><code class="sql plain">Id </code><code class="sql keyword">INT</code> <code class="sql plain">IDENTITY </code><code class="sql keyword">PRIMARY</code> <code class="sql keyword">KEY</code><code class="sql plain">,</code></div><div class="line number19 index18 alt2"><code class="sql spaces">    </code><code class="sql plain">ProductId </code><code class="sql keyword">INT</code> <code class="sql color1">NOT</code> <code class="sql color1">NULL</code> <code class="sql keyword">REFERENCES</code> <code class="sql plain">Products(Id) </code><code class="sql keyword">ON</code> <code class="sql keyword">DELETE</code> <code class="sql keyword">CASCADE</code><code class="sql plain">,</code></div><div class="line number20 index19 alt1"><code class="sql spaces">    </code><code class="sql plain">CustomerId </code><code class="sql keyword">INT</code> <code class="sql color1">NOT</code> <code class="sql color1">NULL</code> <code class="sql keyword">REFERENCES</code> <code class="sql plain">Customers(Id) </code><code class="sql keyword">ON</code> <code class="sql keyword">DELETE</code> <code class="sql keyword">CASCADE</code><code class="sql plain">,</code></div><div class="line number21 index20 alt2"><code class="sql spaces">    </code><code class="sql plain">CreatedAt </code><code class="sql keyword">DATE</code> <code class="sql color1">NOT</code> <code class="sql color1">NULL</code><code class="sql plain">,</code></div><div class="line number22 index21 alt1"><code class="sql spaces">    </code><code class="sql plain">ProductCount </code><code class="sql keyword">INT</code> <code class="sql keyword">DEFAULT</code> <code class="sql plain">1,</code></div><div class="line number23 index22 alt2"><code class="sql spaces">    </code><code class="sql plain">Price MONEY </code><code class="sql color1">NOT</code> <code class="sql color1">NULL</code></div><div class="line number24 index23 alt1"><code class="sql plain">);</code></div></div></td></tr></tbody></table></div></div><p>Используя JOIN, выберем все заказы и добавим к ним информацию о товарах:</p><div><div id="highlighter_965674" class="syntaxhighlighter  sql"><table border="0" cellspacing="0" cellpadding="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="sql keyword">SELECT</code> <code class="sql plain">Orders.CreatedAt, Orders.ProductCount, Products.ProductName </code></div><div class="line number2 index1 alt1"><code class="sql keyword">FROM</code> <code class="sql plain">Orders</code></div><div class="line number3 index2 alt2"><code class="sql color1">JOIN</code> <code class="sql plain">Products </code><code class="sql keyword">ON</code> <code class="sql plain">Products.Id = Orders.ProductId</code></div></div></td></tr></tbody></table></div></div><p>Поскольку таблицы могут содержать столбцы с одинаковыми названиями, то при указании столбцов для выборки указывается их полное имя вместе с именем таблицы, например, &#171;Orders.ProductCount&#187;.</p><p><img src="https://metanit.com/sql/sqlserver/pics/62.png" alt="JOIN ON в T-SQL и MS SQL Server"></p><p>Также используя псевдонимы, мы можем сократить код:</p><div><div id="highlighter_451795" class="syntaxhighlighter  sql"><table border="0" cellspacing="0" cellpadding="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="sql keyword">SELECT</code> <code class="sql plain">O.CreatedAt, O.ProductCount, P.ProductName </code></div><div class="line number2 index1 alt1"><code class="sql keyword">FROM</code> <code class="sql plain">Orders </code><code class="sql keyword">AS</code> <code class="sql plain">O</code></div><div class="line number3 index2 alt2"><code class="sql color1">JOIN</code> <code class="sql plain">Products </code><code class="sql keyword">AS</code> <code class="sql plain">P</code></div><div class="line number4 index3 alt1"><code class="sql keyword">ON</code> <code class="sql plain">P.Id = O.ProductId</code></div></div></td></tr></tbody></table></div></div><p>Подобным образом мы можем присоединять и другие таблицы. Например, добавим к заказу информацию о покупателе из таблицы Customers:</p><div><div id="highlighter_378915" class="syntaxhighlighter  sql"><table border="0" cellspacing="0" cellpadding="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="sql keyword">SELECT</code> <code class="sql plain">Orders.CreatedAt, Customers.FirstName, Products.ProductName </code></div><div class="line number2 index1 alt1"><code class="sql keyword">FROM</code> <code class="sql plain">Orders</code></div><div class="line number3 index2 alt2"><code class="sql color1">JOIN</code> <code class="sql plain">Products </code><code class="sql keyword">ON</code> <code class="sql plain">Products.Id = Orders.ProductId</code></div><div class="line number4 index3 alt1"><code class="sql color1">JOIN</code> <code class="sql plain">Customers </code><code class="sql keyword">ON</code> <code class="sql plain">Customers.Id=Orders.CustomerId</code></div></div></td></tr></tbody></table></div></div><p><img src="https://metanit.com/sql/sqlserver/pics/63.png" alt="Соединение таблиц в T-SQL и MS SQL Server"></p><p>Благодаря соединению таблиц мы можем использовать их столбцы для фильтрации выборки или ее сортировки:</p><div><div id="highlighter_676763" class="syntaxhighlighter  sql"><table border="0" cellspacing="0" cellpadding="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="sql keyword">SELECT</code> <code class="sql plain">Orders.CreatedAt, Customers.FirstName, Products.ProductName </code></div><div class="line number2 index1 alt1"><code class="sql keyword">FROM</code> <code class="sql plain">Orders</code></div><div class="line number3 index2 alt2"><code class="sql color1">JOIN</code> <code class="sql plain">Products </code><code class="sql keyword">ON</code> <code class="sql plain">Products.Id = Orders.ProductId</code></div><div class="line number4 index3 alt1"><code class="sql color1">JOIN</code> <code class="sql plain">Customers </code><code class="sql keyword">ON</code> <code class="sql plain">Customers.Id=Orders.CustomerId</code></div><div class="line number5 index4 alt2"><code class="sql keyword">WHERE</code> <code class="sql plain">Products.Price &lt; 45000</code></div><div class="line number6 index5 alt1"><code class="sql keyword">ORDER</code> <code class="sql keyword">BY</code> <code class="sql plain">Customers.FirstName</code></div></div></td></tr></tbody></table></div></div><p>Условия после ключевого слова ON могут быть более сложными по составу:</p><div><div id="highlighter_951410" class="syntaxhighlighter  sql"><table border="0" cellspacing="0" cellpadding="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="sql keyword">SELECT</code> <code class="sql plain">Orders.CreatedAt, Customers.FirstName, Products.ProductName </code></div><div class="line number2 index1 alt1"><code class="sql keyword">FROM</code> <code class="sql plain">Orders</code></div><div class="line number3 index2 alt2"><code class="sql color1">JOIN</code> <code class="sql plain">Products </code><code class="sql keyword">ON</code> <code class="sql plain">Products.Id = Orders.ProductId </code><code class="sql color1">AND</code> <code class="sql plain">Products.Manufacturer=</code><code class="sql string">'Apple'</code></div><div class="line number4 index3 alt1"><code class="sql color1">JOIN</code> <code class="sql plain">Customers </code><code class="sql keyword">ON</code> <code class="sql plain">Customers.Id=Orders.CustomerId</code></div><div class="line number5 index4 alt2"><code class="sql keyword">ORDER</code> <code class="sql keyword">BY</code> <code class="sql plain">Customers.FirstName</code></div></div></td></tr></tbody></table></div></div><p>В данном случае выбираем все заказы на товары, производителем которых является Apple.</p><p>При использовании оператора JOIN следует учитывать, что процесс соединения таблиц может быть ресурсоемким, поэтому следует соединять только те таблицы, данные из которых действительно необходимы. Чем больше таблиц соединяется, тем больше снижается производительность.</p></div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-7aedf88c elementor-button-success elementor-align-center elementor-widget elementor-widget-button" data-id="7aedf88c" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="#" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">Вперёд</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+						</div>
+			</div>
+		</div>
+						</div>
+			</div>
+		</section>
+						</div>
+			</div>
+		</div>
+			</div> 
+</article>
+				
+			</div><!-- #content -->
+
+			
+		</div><!-- #primary -->
+
+		
+	</div><!-- #content-wrap -->
+
+	
+
+        </main><!-- #main -->
+
+        
+        
+        
+            
+<footer id="footer" class="site-footer" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
+
+    
+    <div id="footer-inner" class="clr">
+
+        
+
+<div id="footer-bottom" class="clr no-footer-nav">
+
+	
+	<div id="footer-bottom-inner" class="container clr">
+
+		
+		
+			<div id="copyright" class="clr" role="contentinfo">
+				2019 - Сделано с любовью			</div><!-- #copyright -->
+
+		
+	</div><!-- #footer-bottom-inner -->
+
+	
+</div><!-- #footer-bottom -->
+
+        
+    </div><!-- #footer-inner -->
+
+    
+</footer><!-- #footer -->            
+        
+                        
+    </div><!-- #wrap -->
+
+    
+</div><!-- #outer-wrap -->
+
+
+
+<a id="scroll-top" class="scroll-top-right" href="#"><span class="fa fa-angle-up"></span></a>
+
+
+<div id="sidr-close">
+	<a href="#" class="toggle-sidr-close">
+		<i class="icon icon-close"></i><span class="close-text">Закрыть меню</span>
+	</a>
+</div>
+    
+    
+<div id="mobile-menu-search" class="clr">
+	<form method="get" action="http://wpfolder/wordpress/" class="mobile-searchform">
+		<input type="search" name="s" autocomplete="off" placeholder="Поиск">
+		<button type="submit" class="searchform-submit">
+			<i class="icon icon-magnifier"></i>
+		</button>
+			</form>
+</div><!-- .mobile-menu-search -->
+
+<script type='text/javascript' src='..\wp-includes\js\imagesloaded.min.js?ver=3.2.0'></script>
+<script type='text/javascript' src='..\wp-content\themes\oceanwp\assets\js\third\magnific-popup.min.js?ver=1.6.7'></script>
+<script type='text/javascript' src='..\wp-content\themes\oceanwp\assets\js\third\lightbox.min.js?ver=1.6.7'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var oceanwpLocalize = {"isRTL":"","menuSearchStyle":"disabled","sidrSource":"#sidr-close, #site-navigation, #mobile-menu-search","sidrDisplace":"1","sidrSide":"left","sidrDropdownTarget":"icon","verticalHeaderTarget":"icon","customSelects":".woocommerce-ordering .orderby, #dropdown_product_cat, .widget_categories select, .widget_archive select, .single-product .variations_form .variations select","ajax_url":"http:\/\/wpfolder\/wordpress\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='..\wp-content\themes\oceanwp\assets\js\main.min.js?ver=1.6.7'></script>
+<script type='text/javascript' src='..\wp-includes\js\wp-embed.min.js?ver=5.2.1'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://wpfolder/wordpress/wp-content/themes/oceanwp/assets/js//third/html5.min.js?ver=1.6.7'></script>
+<![endif]-->
+<script type='text/javascript' src='..\wp-content\plugins\elementor\assets\js\frontend-modules.min.js?ver=2.5.16'></script>
+<script type='text/javascript' src='..\wp-includes\js\jquery\ui\position.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='..\wp-content\plugins\elementor\assets\lib\dialog\dialog.min.js?ver=4.7.1'></script>
+<script type='text/javascript' src='..\wp-content\plugins\elementor\assets\lib\waypoints\waypoints.min.js?ver=4.0.2'></script>
+<script type='text/javascript' src='..\wp-content\plugins\elementor\assets\lib\swiper\swiper.min.js?ver=4.4.6'></script>
+<script type='text/javascript'>
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"version":"2.5.16","urls":{"assets":"http:\/\/wpfolder\/wordpress\/wp-content\/plugins\/elementor\/assets\/"},"settings":{"page":[],"general":{"elementor_global_image_lightbox":"yes","elementor_enable_lightbox_in_editor":"yes"}},"post":{"id":177,"title":"Inner Join","excerpt":""}};
+</script>
+<script type='text/javascript' src='..\wp-content\plugins\elementor\assets\js\frontend.min.js?ver=2.5.16'></script>
+</body>
+</html>
